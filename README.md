@@ -1,7 +1,7 @@
-IUGA (Interactive User Group Analysis) returns k most relevant and diverse user groups for a given group.
+**IUGA (Interactive User Group Analysis) returns k most relevant and diverse user groups for a given group.**
 
-Usage:
-./iuga.py group_id
+*Usage:*
+_./iuga.py group_id_
 
 Parameters:
 group_id is the only necessary parameter which denotes the input group id. Other parameters can be set inside the code.
