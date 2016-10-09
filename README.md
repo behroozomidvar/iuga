@@ -25,7 +25,7 @@ The only requirement of IUGA is to have the list of user groups available. User 
 - `SUPPORT` is the number of group members.
 
 ##Metrics
-**Similarity** is calculated with _Jaccard similarity_. For **diversity**, two different metrics are proposed [1,2]. The library diversity.py provides these metrics.
+**Similarity** is calculated with _Jaccard_ similarity. For **diversity**, two different metrics are proposed [1,2]. The library diversity.py provides these metrics.
 
 ##References
 - [1] Omidvar-Tehrani, Behrooz, Sihem Amer-Yahia, and Alexandre Termier. **Interactive user group analysis**. Proceedings of the 24th ACM International on Conference on Information and Knowledge Management. ACM, 2015.
