@@ -1,6 +1,6 @@
 #Interactive User Group Analysis (IUGA)
 
-**IUGA** (Interactive User Group Analysis) returns k most relevant and diverse user groups for a given group.
+**IUGA** (Interactive User Group Analysis) returns `k` most relevant and diverse user groups for a given group.
 
 ##Usage:
 `./iuga.py group_id`
@@ -28,5 +28,5 @@ The only requirement of IUGA is to have the list of user groups available. User 
 **Similarity** is calculated with _Jaccard similarity_. For **diversity**, two different metrics are proposed [1,2]. The library diversity.py provides these metrics.
 
 ##References
-- [1] Omidvar-Tehrani, Behrooz, Sihem Amer-Yahia, and Alexandre Termier. "Interactive user group analysis." Proceedings of the 24th ACM International on Conference on Information and Knowledge Management. ACM, 2015.
-- [2] Omidvar-Tehrani, Behrooz, et al. "Multi-objective group discovery on the social web." Joint European Conference on Machine Learning and Knowledge Discovery in Databases. Springer International Publishing, 2016.
+- [1] Omidvar-Tehrani, Behrooz, Sihem Amer-Yahia, and Alexandre Termier. **Interactive user group analysis**. Proceedings of the 24th ACM International on Conference on Information and Knowledge Management. ACM, 2015.
+- [2] Omidvar-Tehrani, Behrooz, Sihem Amer-Yahia, Pierre-Francois Dutot and Denis Trystram. **Multi-objective group discovery on the social web**. Joint European Conference on Machine Learning and Knowledge Discovery in Databases. Springer International Publishing, 2016.
