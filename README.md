@@ -1,3 +1,5 @@
+** Interactive User Group Analysis (IUGA) **
+
 *IUGA* (Interactive User Group Analysis) returns k most relevant and diverse user groups for a given group.
 
 *Usage:*
