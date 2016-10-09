@@ -15,24 +15,25 @@
 - If the parameter `buffer_activated` is set to true, IUGA will record final results in buffer so that next time those groups won't be shown again. By default the buffer is activated. To reset buffer: `./iuga.py reset-buffer`
 
 ##Example
-- `./iuga.py 25` IUGA will then return 5 most relevant and diverse groups for group 25 as follows.
+- `./iuga.py 242` IUGA will then return 5 most relevant and diverse groups for group 242 as follows.
 
-**input group**: WWW,  KDD,  PVLDB,  CIKM,  CoRR abs/.,  male,  _(5 members)_
-**231,110** records retrieved and indexed. _(in 395.396 ms)_
-mode set to **explore**.
-buffer is **activated**. Previsouly seen groups won't be shown again.
+- **input group**: WWW,  KDD,  SIGIR,  CoRR abs/.,  male,  (8 members)
+- 231100 records retrieved and indexed. (in 781.278 ms)
+- mode set to **explore**.
+- buffer is **activated**. Previsouly seen groups won't be shown again.
 
-1. **G227**: WWW,  young,  PVLDB,  ICDE,  CIKM,  _(5 members)_
-2. **G85**: KDD,  PVLDB,  SIGMOD Conference,  CIKM,  CoRR abs/.,  _(5 members)_
-3. **G3401**: not_active,  PVLDB,  CIKM,  CoRR abs/.,  male,  _(5 members)_
-4. **G45166**: WSDM,  WWW,  KDD,  SIGIR,  CIKM,  CoRR abs/.,  _(5 members)_
-5. **G4237**: fair_publi,  less_active,  PVLDB,  CIKM,  CoRR abs/.,  male, _(5 members)_
-**diversity**: 0.87 (1.0 being the most diverse)
-**similarity** stopped at 0.2 (limit bound: 0.2)
+1. G150745: Inf. Retr.,  less_active,  WWW,  SIGIR,  male,  (7 members)
+2. G45202: WSDM,  senior,  KDD,  CoRR abs/.,  male,  (8 members)
+3. G116334: ICML,  few_publi,  KDD,  CIKM,  CoRR abs/.,  (8 members)
+4. G1219: less_active,  WWW,  KDD,  young,  CoRR abs/.,  male,  (8 members)
+5. G109: KDD,  young,  SIGIR,  CIKM,  CoRR abs/.,  (9 members)
 
-**execution time** (ms) 200.017
-**nb. lookups** 13103
-**nb. iterations** 5
+- **diversity**: 0.87 (1.0 being the most diverse)
+- **similarity** stopped at 0.21 (limit bound: 0.2)
+
+- **execution time** (ms) 200.014
+- **nb. lookups** 11838
+- **nb. iterations** 32 
 
 ##Requirements
 The only requirement of IUGA is to have the list of user groups available. User groups should be provided in a file called **groups.dat** in the same location as the script. Each line of this file hosts one user group. The structure of each line is as follows:
