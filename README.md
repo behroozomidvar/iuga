@@ -1,6 +1,6 @@
 #Interactive User Group Analysis (IUGA)
-
-**IUGA** (Interactive User Group Analysis) returns `k` most relevant and diverse user groups for a given group.
+- **IUGA** (Interactive User Group Analysis) returns `k` most relevant and diverse user groups for a given group.
+- Please form a Github issue to report bugs or directly contact `behrooz.omidvar@gmail.com`.
 
 ##Usage:
 `./iuga.py group_id`
