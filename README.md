@@ -5,8 +5,8 @@
 ##Usage:
 `./iuga.py group_id`
 
-*Parameters:*
-group_id is the only necessary parameter which denotes the input group id. Other parameters can be set inside the code.
+##Parameters:
+- **group_id** is the only necessary parameter which denotes the input group id. Other parameters can be set inside the code.
 - By default, k is set to 5.
 - As in [1], IUGA can operate in two modes: exploration and exploitation. By default, exploration is applied. 
 - By default, time limit is set to 200 milliseconds.
@@ -14,11 +14,10 @@ group_id is the only necessary parameter which denotes the input group id. Other
 - If the parameter "stop_visiting_once" is set to true, IUGA will only iterate on the group space once. In this case the application may end even earlier than time limit. By default, it is set to false.
 - If the parameter "buffer_activated" is set to true, IUGA will record final results in buffer so that the next time those groups won't be shown again. By default the buffer is activated. To reset buffer: "./iuga.py reset-buffer"
 
-*Example:*
-./iuga.py 25
+**Example:** `./iuga.py 25`
 IUGA will return 5 most relevant and diverse groups for group 25.
 
-*Requirements:*
+##Requirements:
 The only requirement of IUGA is to have the list of user groups available. User groups should be provided in a file called "groups.dat" in the same location as the script. Each line of this file hosts one user group. The structure of each line is as follows:
 ITEM_LIST (SUPPORT) USER_LIST
 - ITEM_LIST is the list of items in the group description separated by comma.
