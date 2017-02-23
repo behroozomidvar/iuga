@@ -8,13 +8,13 @@ import sys
 
 # parameters
 input_g = 0
-investigation_mode = "explore" 		# can be "explore" or "exploit"
+investigation_mode = "exploit" 		# can be "explore" or "exploit"
 time_limit = 200 					# in miliseconds
 k = 5								# number of returned records
 input_file = "groups.dat"			# user group file
 lowest_acceptable_similarity = 0.2
 stop_visiting_once = False			# should the algorithm stop if it reaches the end of the index (i.e., scanning all records once)
-buffer_activated = True				# should the algorithm prevent showing previsouly seen groups
+buffer_activated = False			# should the algorithm prevent showing previsouly seen groups
 
 # capture command-line parameters	
 if sys.argv[1] == "buffer-reset":
@@ -30,7 +30,7 @@ except:
 
 # Note that in case of user group analysis, each group is a record. In case of spatiotemporal data, each geo point is a record.
 
-# list functions
+# begin - list functions
 def intersect(a, b):
     return list(set(a) & set(b))
 
@@ -39,15 +39,19 @@ def union(a, b):
 
 def add_to_list(a, b):
 	return list(a + b)
+# end - list functions
 
 # begin - retrieval functions
 def get_distances_of(elements):
+	# this function uses the glabal variables "k" and "distance_by_id[]"
 	my_distances = []
 	for i in range(0,k):
 		my_distances.append(distance_by_id[elements[i]])
 	return my_distances
 
 def make_new_records(elements,new_element):
+	# it updates the list of k elements with new_element. the position of the new element will be randomly chosen.
+	# this functions uses the global variables "k" and "records[]"
 	output= {}
 	for i in range(0,k):
 		output[i] = elements[i]
@@ -56,46 +60,67 @@ def make_new_records(elements,new_element):
 	return output
 
 def is_inside(bigger_set, smaller_set):
+	# it verifies the subset relationship between two groups.
+	# if smaller_set is a subset of bigger_set, it returns True, otherwise False.
 	for user in smaller_set:
 		if user not in bigger_set:
 			return False
 	return True
 # end - retrieval functions
 
-# variables
+# begin - variables
 current_records = {}		# the ID of current k records will be recorded in this object.
 new_records = {}			# ths ID of next potential k records will be recorded in this object.
 total_time = 0.0			# total execution time
+# end - variables
 
-# read buffer contents
+# begin - read buffer contents
 my_buffer = []
-buffer_file_read = open("buffer.dat")
-for group in buffer_file_read:
-	group = group.strip()
-	my_buffer.append(int(group))
+if buffer_activated == True:
+	buffer_file_read = open("buffer.dat")
+	for group in buffer_file_read:
+		group = group.strip()
+		my_buffer.append(int(group))
+# end - read buffer contents
 
-# dimensions
+# IUGA dimensions
+# these two dictionaries will contain values of similarity and distance for each group.
+# the key of these dictionaries is group_id
 similarities = {}
 distances = {}
 
+# begin recording preprocessing time
+# just for illustration purposes
 preprocessing_begin_time = datetime.datetime.now()
 
 # begin - read groups
-users_list = {}
-items_list = {}
-supports = {}
-group_cnt = 0
+
+# group file is given as "input_file". The structure of this file is enforced by LCM [Uno et al.].
+# an autoincrement ID will be given to groups. The first group will be identified with "0".
+
+# following dictionaries keep users, items and supports of groups.
+# the key for dictionaries if group_id.
+users_list = {}	# each element is itself a list of users.
+items_list = {}	# each element is a string of items.
+supports = {}	# each element is a number.
+
+group_cnt = 0	# autoincrement counter for group_id
 f = open(input_file)
 for line in f:
 	line = line.strip()
-	parts_for_users = line.split(")")
-	parts_for_items = line.split("(")
+	open_par = 0
+	close_par = 0
+	for i in range(0,len(line)):
+		if line[i] == "(" and str.isdigit(line[i+1]) == True:
+			open_par = i
+		if line[i] == ")" and str.isdigit(line[i-1]) == True:
+			close_par = i
+	items = line[0:open_par]
+	users = line[close_par+1:].split(",")
 	try:
-		my_support = int(line.split("(")[1].split(")")[0])
+		my_support = int(line[open_par+1:close_par])
 	except:
 		my_support = 0
-	users = parts_for_users[1].split(",")
-	items = parts_for_items[0]
 	for i in range(0,len(users)):
 		users[i] = users[i].strip()
 	users_list[group_cnt] = users
@@ -120,15 +145,12 @@ for i in range(0,group_cnt):
 	similarities[i] = sim
 # end - compute similarities
 
-if input_g >= len(similarities):
-	print "ERROR: There is only "+str(len(similarities))+" groups available! The given id "+str(input_g)+" is not valid."
-	exit()
-
-
 # sorting similarities in descending order
 similarities_sorted = sorted(similarities.items(), key=operator.itemgetter(1), reverse=True)
 
 # begin - prepare lists for easy retrieval
+# the dictionary "records" contains group_id in descending order of their similarity. Key is autoincrement.
+# the dictionary "similarity_by_id" contains similarity value. Key is group_id.
 records = {}
 similarity_by_id = {}
 distance_by_id = {}
