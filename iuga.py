@@ -8,7 +8,7 @@ import sys
 
 # parameters
 input_g = 0
-investigation_mode = "exploit" 		# can be "explore" or "exploit"
+investigation_mode = "explore" 		# can be "explore" or "exploit"
 time_limit = 200 					# in miliseconds
 k = 5								# number of returned records
 input_file = "groups.dat"			# user group file
